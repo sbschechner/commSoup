@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import DateTime from './DateTime';
+import LocInput from './LocInput';
 
-class App extends Component {
-  render() {
+
+export default function App(props) {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+        <Router>
+            <div className="app">
+                <header>
+                    <h1><Link to="/">Trelloish</Link></h1>
+                </header>
+                <main>
+                    <Route exact path="/" component={DateTime} />
+                    <Route exact path="/LocInput" component={LocInput} />
+                </main>
+            </div>
+        </Router>
     );
-  }
 }
-
-export default App;
