@@ -5,18 +5,29 @@ class DateTime extends Component {
   constructor(props){
     super(props);
     this.state = {
-        userGuess: null,
-        actualNum: 0,
-        tempNumber : null,
-        previousGuessesArr: [],
+        currentDay: null,
+        currentHour: null,
+        currentMinute:null
         };
 
-this.handleClick = this.handleClick.bind(this);
+this.getDate = this.getDate.bind(this);
   }
 
-handleClick(){
-	
+getDate(){
+var dateTime = new Date();
+return dateTime
 }
+
+componentDidMount(){ 
+  var theDate = this.getDate();
+  this.setState({
+  	currentDay : theDate.getDay(),
+  	currentHour: theDate.getHours(),
+  	currentMinute: theDate.getMinutes()
+  })
+}
+
+//return the hours and dates and if it is meal time
 
   render() { 
     return(
