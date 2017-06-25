@@ -16,7 +16,8 @@ export default function App(props) {
                     <Route exact path="/" component={DateTime} />
                     <Route exact path="/LocInput" component={LocInput} />
                     <p> text </p>
-                    
+                <DateTime />
+                <LocInput />
                 </main>
             </div>
         </Router>
