@@ -9,7 +9,7 @@ export default function App(props) {
         <Router>
             <div className="app">
                 <header>
-                    <h1><Link to="/">Trelloish</Link></h1>
+                    <h1><Link to="/">CommSoup</Link></h1>
                 </header>
                 <main>
                     <Route exact path="/" component={DateTime} />

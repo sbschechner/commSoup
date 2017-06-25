@@ -12,9 +12,20 @@ class DateTime extends Component {
         };
 
 this.handleClick = this.handleClick.bind(this);
-this.numberGenerator = this.numberGenerator.bind(this) 
-this.changeTempNumber = this.changeTempNumber.bind(this)
-this.callAPI = this.callAPI.bind(this)
   }
 
-  
+handleClick(){
+	
+}
+
+  render() { 
+    return(
+      <div className ="scoreTableCont">
+
+     </div>
+      );
+  }
+}
+
+export default DateTime;
+
