@@ -19,30 +19,42 @@ this.changeTempNumber = this.changeTempNumber.bind(this);
 this.handleClick = this.handleClick.bind(this);
   }
 
+
 getLoc(){
 	if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(this.showPosition());
-        this.setState({
-        	needManual : false
-        })
+		//SHOULD BREak into two components and also have button to get location services....
+
+        navigator.geolocation.getCurrentPosition(this.showPosition, showError);
+        return <p> we found you </p>
 	}
 	else{
 		return(
-		<p> Seems like Location services arent available. Please enable locaiton services or we can put it in manually </p>
+		<div>
+		{this.manualInput()}
+		<p> Seems like Location services arent available. Please enable location services or we can put it in manually </p>
+		</div>
 		)
-		this.manualInput()
 	}
 }
 
-/*
+
 showPosition(position) {
 var data = [...position]
- this.setState({
-        	latitutde : data.latitude,
+ /*this.setState({
+        latitutde : data.latitude,
        	longitude : data.longitude
         })
+
+      //HOW DO I UPDATE THE LOCATION set state?
+      	//I should use conditional formatting better..... like call a different component
+      		Not do it this way where im writing forms in the jsx
+ */
 }
-*/
+
+showError(error){
+
+}
+
 
 manualInput(){
  return(
@@ -69,9 +81,8 @@ handleClick(event){
     return(
       <div className ="LocInputCont">
       	<h2> Lets first find where you are </h2>
-      	{this.getLoc()}
-
-      	
+      	<button onClick = {this.getLoc()} />
+      	<p> we have made it here </p>
      </div>
       );
   }
