@@ -26,6 +26,7 @@ var resultsList = this.props.closest.map((index, LocName, LocAddress) =>
     <table>{resultsList}</table>
     );
 }
+
 render(){
 	return(
 		<div className ='ResultsListCont'>

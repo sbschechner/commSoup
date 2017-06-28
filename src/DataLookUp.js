@@ -8,34 +8,34 @@ class DataLookUp extends Component {
     this.state = {
     	KitchData_MockData: [
     	{	
- +			"id": "1111111",
- +			"LocName" : "Soup Kitch",
- +			"LocLat" : 999999,
- +			"LocLang" : 33333333
- +		},
- +		{
- +			"id": "222222",
- +			"LocName" : "Community Kitch",
- +			"LocLat" : 4444444,
- +			"LocLang" : 111111,
- +		}
+ 			"id": "1111111",
+ 			"LocName" : "Soup Kitch",
+ 			"LocLat" : 999999,
+ 			"LocLong" : 33333333
+ 		},
+ 		{
+ 			"id": "222222",
+ 			"LocName" : "Community Kitch",
+ 			"LocLat" : 4444444,
+ 			"LocLong" : 111111,
+ 		}
     	],
     	
     	closest :[
     	{	
- +			"id": "7777777",
- +			"LocName" : "Location 1",
+ 			"id": "7777777",
+ 			"LocName" : "Location 1",
  			"address" : "89 broadway",
- +			"LocLat" : 101010101,
- +			"LocLang" : 0994849
- +		},
- +		{
- +			"id": "666666",
- +			"LocName" : "Location 2",
+ 			"LocLat" : 101010101,
+ 			"LocLong" : 0994849
+ 		},
+ 		{
+ 			"id": "666666",
+ 			"LocName" : "Location 2",
  			"address": "101 main street",
- +			"LocLat" : 19938384,
- +			"LocLang" : 493020,
- +		}
+ 			"LocLat" : 19938384,
+ 			"LocLong" : 493020,
+ 		}
     	],
 
        };
@@ -52,21 +52,20 @@ accessData(){ //THIS SHOULD FIND THE TOP 5 CLOSEST?
 //the math can be done on the server side.....?
 //return the top 5 shortest
 //will need to store the top 5 shortest 
-	fetch("/")
+	//fetch("/")
 
 }
 
 
-
 //will call DB and call Google Directions API ?
-//MAPIt basically renders a map as 5 different markers
+
+//might need a button to "accessData and run it and therefore update state....."
 
 
 render(){
 	this.accessData();
 	return(
 		<div className ='dataLookUpCont'>
-
 		<Mapit closest = {this.state.closest} userLat = {this.props.userLat} userLong = {this.props.userLong} />
 
 		<ResultsList closest = {this.state.closest}/>
