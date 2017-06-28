@@ -20,6 +20,8 @@ this.props.geography.getCurrentPosition
 //it will also pass to map component (map component is going to render different markers) and call results
 
 
+//might need a button which then gets location and therefore only runs on click
+
 showPosition(position) {
 var data = [...position]
  /*this.setState({
@@ -32,7 +34,8 @@ var data = [...position]
 }
 
 showError(error){
-
+if (error.code == error.PERMISSION_DENIED)
+      console.log("User Said No");
 }
 
 
@@ -40,7 +43,7 @@ showError(error){
     return(
       <div className ="LocInputCont">
       	<h2> Lets first find where you are </h2>
-      	<button value="Find Me" onClick = {this.getLoc()} />
+     <DataLookUp userLat = {this.state.latitutde} userLong = {this.state.longitude} />
      </div>
       );
   	}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './ManualLoc.css';
+import DataLookUp from './DataLookUp'
 
 
 class ManualLoc extends Component {
@@ -16,13 +17,6 @@ this.handleClick = this.handleClick.bind(this);
 this.zipToLocation = this.zipToLocation.bind(this);
     }
 
-
-//THIS SHOULD PASS TO CHILD COMPONENT WHICH IS THE ONE THAT WILL CALL DATABASE
-//will call DB and call Google Directions API 
-//should place you on a map and then as it is searching data base
-//it will also pass to map component (map component is going to render different markers) and call results
-
-
 changeTempNumber(event){
     this.setState({tempZip : event.target.value})
     }
@@ -30,11 +24,11 @@ changeTempNumber(event){
 handleClick(event){
   event.preventDefault();
   this.setState({manualInput: this.state.tempZip})
+  this.zipToLocation()
 }
 
-//need to get actual API key
 zipToLocation(){
-  var URL =  'https://www.zipcodeapi.com/rest/scFYuxWGl5N2XIQ6iEqBYDdBwN532dJuppsUXpBivoks6byoQZ0PDeq91wc3JWx9/info.json/'+ this.state.manualLoc+'/degrees'
+  var URL =  'https://www.zipcodeapi.com/rest/clqq6LHooxlUDBf8p3AtzDuSL9BUgVUtgkTm6BLv87qMIFU8JvCi96bUgMPxHJ0Y/info.json/'+ this.state.manualLoc+'/degrees'
   fetch(URL).then((response) => response.json())
      
      .then(function(data){
@@ -56,6 +50,7 @@ zipToLocation(){
 render() { 
     return(
       <div className ="ManualLocCont">
+      Lets do it manually!
         <form>
         <label>
          Please enter your zip code:
@@ -63,8 +58,7 @@ render() {
             </label>
             <input type="submit" value="Submit Guess" onClick = {this.handleClick()}/>
         </form>
-        {this.zipToLocation()}
-        <DATABASECOMPONT userLat = {this.state.latitutde} userLong = {this.state.longitude} />
+        <DataLookUp userLat = {this.state.latitutde} userLong = {this.state.longitude} />
      </div>
       );
     }
