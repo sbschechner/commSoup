@@ -20,16 +20,20 @@ placeOnMap(){
 //can use .maps
 // https://www.npmjs.com/package/google-maps-react
   //specificall the marker section
+  //wouldnt I need an API ? like where would that get entered?
+  //Automatically Lazy-loading Google API - this title - not sure i understand this? 
 }
 
 render(){
 	return(
 		<div className ='MapRenderCont'>
 			{this.placeOnMap()}
-		<div />
+		</div>
 
 		)
 
 	}
 
 }
+
+export default Mapit;

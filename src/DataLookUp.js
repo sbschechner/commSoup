@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './DataLookUp.css';
-
+import Mapit from './Mapit'
 
 class DataLookUp extends Component {
   constructor(props){
@@ -27,7 +27,7 @@ class DataLookUp extends Component {
  			"LocName" : "Location 1",
  			"address" : "89 broadway",
  			"LocLat" : 101010101,
- 			"LocLong" : 0994849
+ 			"LocLong" : 994849
  		},
  		{
  			"id": "666666",
@@ -40,7 +40,8 @@ class DataLookUp extends Component {
 
        };
 
-this.accessData = this.changeTempNumber.bind(this);
+this.accessData = this.accessData.bind(this);
+this.printToTable = this.printToTable.bind(this);
 
     }
 
@@ -49,10 +50,12 @@ accessData(){ //THIS SHOULD FIND THE TOP 5 CLOSEST?
 //should take props.userLat and userLong
 //should then do the required math on each entry to figure out the distance between me and location
 //maybe find the distance and add as variable? 
-//the math can be done on the server side.....?
+//the math can be done on the server side.....? as in it requires lat and long and returns top 5 that are closest?
+//it essentially would be a find min (there is an array for this) but 5 times....
+//like Math.min and spread operator
 //return the top 5 shortest
 //will need to store the top 5 shortest 
-	//fetch("/")
+	//fetch("/").response.json()
 
 }
 
@@ -61,14 +64,34 @@ accessData(){ //THIS SHOULD FIND THE TOP 5 CLOSEST?
 
 //might need a button to "accessData and run it and therefore update state....."
 
+printToTable(){  
+var resultsList = this.state.closest.map((index, LocName, LocAddress) => 
+     <tr key = {index}>
+        <td>
+        {LocName}
+        </td>
+        <td>
+        {LocAddress}
+        </td>
+      </tr>
+      );
+  return (
+    <tbody>{resultsList}</tbody>
+    );
+}
 
 render(){
 	this.accessData();
 	return(
 		<div className ='dataLookUpCont'>
-		<Mapit closest = {this.state.closest} userLat = {this.props.userLat} userLong = {this.props.userLong} />
+        <p> we are in the data look up </p>
+		<Mapit loc1Lat = {this.state.closest[0].LocLat} loc1Long = {this.state.closest[0].LocLong} userLat = {this.props.userLat} userLong = {this.props.userLong} />
 
-		<ResultsList closest = {this.state.closest}/>
+		<div className ='ResultsListCont'>
+            <table>
+            {this.printToTable()}
+            </table>
+        </div>
 
 		</div>
 		)
@@ -76,3 +99,4 @@ render(){
 }
 
 export default DataLookUp;
+

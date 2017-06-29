@@ -11,8 +11,7 @@ this.printToTable = this.printToTable.bind(this)
 
 printToTable(){  
 var resultsList = this.props.closest.map((index, LocName, LocAddress) => 
-     <tbody>
-      <tr key = {index}>
+     <tr key = {index}>
         <td>
         {LocName}
         </td>
@@ -20,21 +19,24 @@ var resultsList = this.props.closest.map((index, LocName, LocAddress) =>
         {LocAddress}
         </td>
       </tr>
-      </tbody>
       );
   return (
-    <table>{resultsList}</table>
+    <tbody>{resultsList}</tbody>
     );
 }
 
 render(){
 	return(
 		<div className ='ResultsListCont'>
-			{this.printToTable()}
-		<div />
+			<table>
+      {this.printToTable()}
+      </table>
+		</div>
 
 		)
 
 	}
 
 }
+
+export default ResultsList;
