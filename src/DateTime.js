@@ -22,13 +22,13 @@ return dateTime
 mealChange(){
 	if (this.state.currentHour >8  && this.state.currentHour <11) {
 		return(
-			<div class="mealTime">
+			<div className="mealTime">
 				<h3> It is BreakFast Time </h3>
 			</div>
 			)
 	}
 
-	else if (this.state.currentHour >13 && this.state.currentHour <15){
+	else if (this.state.currentHour >=12 && this.state.currentHour <15){
 		return(
 			<div className = "mealTime">
 				<h3> It is Lunch Time </h3>

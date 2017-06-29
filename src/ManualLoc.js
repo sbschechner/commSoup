@@ -57,7 +57,7 @@ render() {
          Please enter your zip code:
             <input type='number' defaultValue = {this.state.tempZip}  onChange = {this.changeTempNumber}/>
             </label>
-            <input type="submit" value="Submit Guess" onClick = {this.handleClick}/>
+            <input type="submit" value="Submit Zip" onClick = {this.handleClick}/>
         </form>
         <DataLookUp userLat = {this.state.latitutde} userLong = {this.state.longitude} />
      </div>

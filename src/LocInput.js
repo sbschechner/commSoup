@@ -38,16 +38,26 @@ locationCheck(){
 	}
 }
 
+//<DataLookUp userLat = {this.props.coords.latitude} userLong = {this.props.coords.longitude} />
+//problem with trying to pass an object which is why Manual isn't working
+
   render() { 
       return !this.props.isGeolocationAvailable
-      ? <div>Your browser does not support Geolocation </div>
+      ? <div>
+      <div>Your browser does not support Geolocation </div>
+   		<p> need to update browser </p>
+   		<ManualLoc />
+      </div>
       : !this.props.isGeolocationEnabled
-        ? <div>Geolocation is not enabled</div>
+        ? <div> 
+        <div>Geolocation is not enabled</div>
+        <p> please allow location </p>
+        <ManualLoc />
+        </div>
         : this.props.coords
           ? 
           <div>
-          <p> text in the this props </p>
-         <DataLookUp userLat = {this.props.coords.latitude} userLong = {this.props.coords.longitude} />
+          <p> We have your location </p>
           <table>
             <tbody>
               <tr>
@@ -60,6 +70,8 @@ locationCheck(){
              </tr>
             </tbody>
           </table>
+          <p> text undernearth </p>
+          <DataLookUp userLat = {this.props.coords.latitude} userLong = {this.props.coords.longitude} />
           </div>
           : <div>Getting the location data&hellip; </div>;
 	}
@@ -70,7 +82,7 @@ export default geolocated({
   positionOptions: {
     enableHighAccuracy: false,
   },
-  userDecisionTimeout: 700
+  userDecisionTimeout: 100
 }) (LocInput);
 
 

@@ -38,6 +38,8 @@ class DataLookUp extends Component {
  		}
     	],
 
+    userLat: null,
+    userLong: null
        };
 
 this.accessData = this.accessData.bind(this);
@@ -80,18 +82,24 @@ var resultsList = this.state.closest.map((index, LocName, LocAddress) =>
     );
 }
 
-render(){
-	this.accessData();
-	return(
-		<div className ='dataLookUpCont'>
-        <p> we are in the data look up </p>
-		<Mapit loc1Lat = {this.state.closest[0].LocLat} loc1Long = {this.state.closest[0].LocLong} userLat = {this.props.userLat} userLong = {this.props.userLong} />
-
-		<div className ='ResultsListCont'>
+//for MapIt props loc1Lat = {this.state.closest[0].LocLat} loc1Long = {this.state.closest[0].LocLong}
+//why problematic? 
+/*   <div className ='ResultsListCont'>
             <table>
             {this.printToTable()}
             </table>
         </div>
+*/
+
+render(){
+this.accessData();
+  console.log("we are in DataLookup" + this.props.userLong + " a " + this.props.userLat +  " b  "+ this.state.closest);
+	return(
+		<div className ='dataLookUpCont'>
+        <p> we are in the data look up </p>
+		<Mapit locs = {this.state.closest} userLat = {this.props.userLat} userLong = {this.props.userLong} />
+
+
 
 		</div>
 		)
