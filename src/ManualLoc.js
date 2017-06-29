@@ -52,6 +52,7 @@ render() {
     return(
       <div className ="ManualLocCont">
       Lets do it manually!
+      {console.log("manual loc" + this.state.latitutde)}
         <form>
         <label>
          Please enter your zip code:

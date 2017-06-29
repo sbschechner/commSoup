@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {GoogleApiWrapper} from 'GoogleMapsReactComponent';
+import {Map, Marker} from 'google-maps-react';
 import './Mapit.css';
 
 
@@ -23,6 +23,7 @@ placeOnMap(){
   //specificall the marker section
   //wouldnt I need an API ? like where would that get entered?
   //Automatically Lazy-loading Google API - this title - not sure i understand this? 
+  //https://github.com/fullstackreact/google-maps-react/blob/master/README.md
 }
 
 render(){
@@ -44,7 +45,10 @@ render(){
 	}
 
 }
-export default GoogleApiWrapper({
+
+export default Mapit;
+
+/*export default GoogleApiWrapper({
   apiKey: "AIzaSyA0nidzDD_rDGc7MUldzJ68MaC2naf3tyI"
 }) (Mapit)
-
+*/

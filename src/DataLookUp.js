@@ -57,6 +57,7 @@ accessData(){ //THIS SHOULD FIND THE TOP 5 CLOSEST?
 //like Math.min and spread operator
 //return the top 5 shortest
 //will need to store the top 5 shortest 
+//https://stackoverflow.com/questions/365826/calculate-distance-between-2-gps-coordinates
 	//fetch("/").response.json()
 
 }
@@ -83,7 +84,7 @@ var resultsList = this.state.closest.map((index, LocName, LocAddress) =>
 }
 
 //for MapIt props loc1Lat = {this.state.closest[0].LocLat} loc1Long = {this.state.closest[0].LocLong}
-//why problematic? 
+//why problematic?  
 /*   <div className ='ResultsListCont'>
             <table>
             {this.printToTable()}
