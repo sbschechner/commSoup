@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Map, Marker} from 'google-maps-react';
+import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
 import './Mapit.css';
 
 
@@ -24,19 +24,25 @@ placeOnMap(){
   //wouldnt I need an API ? like where would that get entered?
   //Automatically Lazy-loading Google API - this title - not sure i understand this? 
   //https://github.com/fullstackreact/google-maps-react/blob/master/README.md
+  //https://www.fullstackreact.com/articles/how-to-write-a-google-maps-react-component/#the-map-container-component
 }
+
+//I THINK THEY ARE RENDERING BUT SO FAR AWAY - need to adjust center of map
 
 render(){
 	return(
 		<div className ='MapRenderCont'>
-			{this.placeOnMap()}
-      <Map google={this.props.google}
-        style={{width: '100%', height: '100%', position: 'relative'}}
+      <Map className ="mapper" google={this.props.google}
+        style={{width: '75%', height: '100%', position: 'relative'}}
         className={'map'}
         zoom={14}>
   <Marker
     name={'SOMA'}
-    position={{lat: 37.778519, lng: -122.405640}} />
+    position={{lat: this.props.userLat, lng: this.props.userLong}} />
+  <Marker
+          name={'Dolores park'}
+          position={{lat: 38.759703, lng: -120.428093}} />
+        <Marker />
     
     </Map>
     </div>
@@ -46,9 +52,9 @@ render(){
 
 }
 
-export default Mapit;
 
-/*export default GoogleApiWrapper({
+
+export default GoogleApiWrapper({
   apiKey: "AIzaSyA0nidzDD_rDGc7MUldzJ68MaC2naf3tyI"
 }) (Mapit)
-*/
+
