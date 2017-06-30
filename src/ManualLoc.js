@@ -8,7 +8,7 @@ class ManualLoc extends Component {
   constructor(props){
     super(props);
     this.state = {
-    	latitutde: null,
+    	latitude: null,
     	longitude: null,
     	manualInput: null,
     	tempZip: null,
@@ -24,16 +24,18 @@ changeTempNumber(event){
 
 handleClick(event){
   event.preventDefault();
+  console.log("handle Click");
+  console.log(this.state);
   this.setState({manualInput: this.state.tempZip})
   this.zipToLocation()
 }
 
 zipToLocation(){
-  var URL =  'https://www.zipcodeapi.com/rest/clqq6LHooxlUDBf8p3AtzDuSL9BUgVUtgkTm6BLv87qMIFU8JvCi96bUgMPxHJ0Y/info.json/'+ this.state.manualLoc+'/degrees'
+  var URL =  'https://www.zipcodeapi.com/rest/js-Hl77BtUvoCMVIgyb7lK0u4cUWnkhEe9lzgsbKmH8Zu4HKDSRYDSsH5mDsHV7V5sv/info.json/'+ this.state.tempZip+'/degrees'
   fetch(URL).then((response) => response.json())
      
-     .then(function(data){
-        console.log("hello", data)
+     .then(data => {
+        console.log("hello", data);
         this.setState({
             latitude : data.lat,
             longitude: data.lng,
@@ -52,7 +54,7 @@ render() {
     return(
       <div className ="ManualLocCont">
       Lets do it manually!
-      {console.log("manual loc" + this.state.latitutde)}
+      {console.log("manual loc" + this.state.latitude)}
         <form>
         <label>
          Please enter your zip code:

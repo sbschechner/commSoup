@@ -12,7 +12,7 @@ this.locationCheck= this.locationCheck.bind(this);
 }
 
 locationCheck(){
-	if(this.props.isGeolocationAvailable === false){
+	if(!this.props.isGeolocationAvailable){
 		return(
 			<div>
 			<p> Your browser does not suppot geolocation </p>
@@ -20,7 +20,7 @@ locationCheck(){
 			</div>
 			)
 	}
-	else if (this.props.isGeolocationEnabled === false){
+	else if (!this.props.isGeolocationEnabled){
 		return (
 		<div>
 		<p> Geolocation is not enabled </p>
@@ -29,51 +29,31 @@ locationCheck(){
 		)
 	}
 
-	else{
+	else if(this.props.coords){
 		return(
 			<div>
+				<p> Latitude {this.props.coords.latitude} </p>
+				<p> Longitude {this.props.coords.longitude} </p>
         		<DataLookUp userLat = {this.props.coords.latitude} userLong = {this.props.coords.longitude} />
         	</div>
         	)
+		}
+	
+	else {
+		return(
+			<p> finding </p>
+			)
 	}
+
 }
 
-//<DataLookUp userLat = {this.props.coords.latitude} userLong = {this.props.coords.longitude} />
-//problem with trying to pass an object which is why Manual isn't working
-
   render() { 
-      return !this.props.isGeolocationAvailable
-      ? <div>
-      <div>Your browser does not support Geolocation </div>
-   		<p> need to update browser </p>
-   		<ManualLoc />
-      </div>
-      : !this.props.isGeolocationEnabled
-        ? <div> 
-        <div>Geolocation is not enabled</div>
-        <p> please allow location </p>
-        <ManualLoc />
-        </div>
-        : this.props.coords
-          ? 
-          <div>
-          <p> We have your location </p>
-          <table>
-            <tbody>
-              <tr>
-              	<td>latitude</td>
-              	<td>{this.props.coords.latitude}</td>
-              </tr>
-              <tr>
-              	<td>longitude</td>
-             	 <td>{this.props.coords.longitude}</td>
-             </tr>
-            </tbody>
-          </table>
-          <p> text undernearth </p>
-          <DataLookUp userLat = {this.props.coords.latitude} userLong = {this.props.coords.longitude} />
-          </div>
-          : <div>Getting the location data&hellip; </div>;
+      return (
+      	<div>
+      	{this.locationCheck()}
+      	</div>
+      	)
+   
 	}
 }
 

@@ -59,7 +59,7 @@ accessData(){ //THIS SHOULD FIND THE TOP 5 CLOSEST?
 //will need to store the top 5 shortest 
 //https://stackoverflow.com/questions/365826/calculate-distance-between-2-gps-coordinates
 	//fetch("/").response.json()
-
+console.log("accesing the data base");
 }
 
 
@@ -93,11 +93,11 @@ var resultsList = this.state.closest.map((index, LocName, LocAddress) =>
 */
 
 render(){
-this.accessData();
-  console.log("we are in DataLookup" + this.props.userLong + " a " + this.props.userLat +  " b  "+ this.state.closest);
+  console.log("we are in DataLookup" + this.props.userLong + " a " + this.props.userLat +  " b  "+ this.state.closest[1]);
 	return(
 		<div className ='dataLookUpCont'>
         <p> we are in the data look up </p>
+        <button onClick={this.accessData}> Find your Nearest Location</button>
 		<Mapit locs = {this.state.closest} userLat = {this.props.userLat} userLong = {this.props.userLong} />
 
 
