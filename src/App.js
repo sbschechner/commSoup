@@ -10,8 +10,10 @@ export default function App(props) {
         <Router>
             <div className="app">
                 <header className = "navBar">
-                    <h1><Link to="/">CommSoup</Link></h1>
-                    <h1> <Link to="/results"> How it Works </Link> </h1>
+                    <div className ='navBarLinks'>
+                      <h1><Link to="/">CommSoup</Link></h1>
+                      <h1> <Link to="/results"> How it Works </Link> </h1>
+                    </div>
                 </header>
                 <main>
                     <Route exact path="/" component={DateTime} />

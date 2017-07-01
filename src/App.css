@@ -5,3 +5,11 @@
 .navBar{
   background: yellow;
 }
+
+.navBarLinks{
+  display: inline-flex;
+}
+
+.navBarLinks > h1{
+  padding-left: 25%;
+}

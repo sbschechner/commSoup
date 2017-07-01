@@ -4,46 +4,36 @@ import './Mapit.css';
 
 
 class Mapit extends Component {
-   constructor(props){
-    super(props);
-    this.state = {
-        };
 
-this.placeOnMap = this.placeOnMap.bind(this)
-  }
-  
-placeOnMap(){  
-//take this.props.closest and places all 5 markets on a map. 
-//google maps API 
-//this.props.closest[0].Locname = ? 
-//this.props.closest[0].LocLat = ? 
-//this.props.closeest[0].LocLong=?
-//can use .maps
-// https://www.npmjs.com/package/google-maps-react
-  //specificall the marker section
-  //wouldnt I need an API ? like where would that get entered?
-  //Automatically Lazy-loading Google API - this title - not sure i understand this? 
-  //https://github.com/fullstackreact/google-maps-react/blob/master/README.md
-  //https://www.fullstackreact.com/articles/how-to-write-a-google-maps-react-component/#the-map-container-component
-}
 
-//I THINK THEY ARE RENDERING BUT SO FAR AWAY - need to adjust center of map
+
+//I THINK THEY ARE RENDERING BUT SO FAR AWAY - need to adjust center of map to reload and update based on center
+//mapCenter on https://www.npmjs.com/package/google-maps-react
+
+
 
 render(){
 	return(
 		<div className ='MapRenderCont'>
       <Map className ="mapper" google={this.props.google}
-        style={{width: '75%', height: '100%', position: 'relative'}}
+        style={{width: '85%', height: '100%', position: 'relative'}}
         className={'map'}
-        zoom={14}>
+
+        >
   <Marker
-    name={'SOMA'}
+    name={'User'}
     position={{lat: this.props.userLat, lng: this.props.userLong}} />
+  
   <Marker
-          name={'Dolores park'}
-          position={{lat: 38.759703, lng: -120.428093}} />
+      name={'Loc 1'}
+          position={{lat: this.props.locs[0].LocLat, lng: this.props.locs[0].LocLong}} />
         <Marker />
     
+  <Marker
+      name={'Loc 2'}
+          position={{lat: this.props.locs[1].LocLat, lng: this.props.locs[1].LocLong}} />
+        <Marker />
+
     </Map>
     </div>
 		)
@@ -52,6 +42,18 @@ render(){
 
 }
 
+  Map.defaultProps = {
+    zoom: 10,
+    //set in NYC
+    initialCenter: {
+      lat: 40.2372163,
+      lng: -73.99669639999999
+    },
+    center: {
+    },
+    centerAroundCurrentLocation: false,
+    visible: true
+  };
 
 
 export default GoogleApiWrapper({

@@ -10,7 +10,6 @@ class ManualLoc extends Component {
     this.state = {
     	latitude: null,
     	longitude: null,
-    	manualInput: null,
     	tempZip: null,
         };
 this.changeTempNumber = this.changeTempNumber.bind(this);
@@ -25,8 +24,6 @@ changeTempNumber(event){
 handleClick(event){
   event.preventDefault();
   console.log("handle Click");
-  console.log(this.state);
-  this.setState({manualInput: this.state.tempZip})
   this.zipToLocation()
 }
 
@@ -35,11 +32,11 @@ zipToLocation(){
   fetch(URL).then((response) => response.json())
      
      .then(data => {
-        console.log("hello", data);
+        console.log("hello", data.lat);
+        //THIS IS NOT GOING TO STATE BUT INSTEAD THIS OF MAPS.  
         this.setState({
             latitude : data.lat,
             longitude: data.lng,
-
         })
     
     .catch(function(err){
@@ -54,7 +51,6 @@ render() {
     return(
       <div className ="ManualLocCont">
       Lets do it manually!
-      {console.log("manual loc" + this.state.latitude)}
         <form>
         <label>
          Please enter your zip code:
@@ -62,7 +58,7 @@ render() {
             </label>
             <input type="submit" value="Submit Zip" onClick = {this.handleClick}/>
         </form>
-        <DataLookUp userLat = {this.state.latitutde} userLong = {this.state.longitude} />
+        <DataLookUp userLat = {this.state.latitude} userLong = {this.state.longitude} />
      </div>
       );
     }

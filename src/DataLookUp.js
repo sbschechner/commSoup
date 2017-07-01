@@ -26,15 +26,15 @@ class DataLookUp extends Component {
  			"id": "7777777",
  			"LocName" : "Location 1",
  			"address" : "89 broadway",
- 			"LocLat" : 101010101,
- 			"LocLong" : 994849
+ 			"LocLat" : 39.2374383,
+ 			"LocLong" : -73.9970302
  		},
  		{
  			"id": "666666",
- 			"LocName" : "Location 2",
+ 			"LocName" : "Location 2's sweet cool name",
  			"address": "101 main street",
- 			"LocLat" : 19938384,
- 			"LocLong" : 493020,
+ 			"LocLat" : 41.2374383,
+ 			"LocLong" : -72.9970302,
  		}
     	],
 
@@ -62,45 +62,59 @@ accessData(){ //THIS SHOULD FIND THE TOP 5 CLOSEST?
 console.log("accesing the data base");
 }
 
+//
 
-//will call DB and call Google Directions API ?
 
-//might need a button to "accessData and run it and therefore update state....."
+//needs double for loops
 
 printToTable(){  
-var resultsList = this.state.closest.map((index, LocName, LocAddress) => 
-     <tr key = {index}>
-        <td>
-        {LocName}
-        </td>
-        <td>
-        {LocAddress}
-        </td>
-      </tr>
-      );
-  return (
-    <tbody>{resultsList}</tbody>
-    );
-}
+var resultsList =[];
+var addressList =[];
+var nameList =[]
 
-//for MapIt props loc1Lat = {this.state.closest[0].LocLat} loc1Long = {this.state.closest[0].LocLong}
-//why problematic?  
-/*   <div className ='ResultsListCont'>
-            <table>
-            {this.printToTable()}
-            </table>
-        </div>
-*/
+for(var i=0; this.state.closest.length>i; i++){
+     resultsList = Object.values(this.state.closest[i])
+      nameList.push(resultsList[1]);
+      addressList.push(resultsList[2]);
+      }
+      
+  return (
+  <div>
+    <table>
+      <tbody>
+        <tr>
+          <th> Name </th>
+          <th> address </th>
+        </tr>
+        <tr>
+          <td> {nameList[0]} </td>
+          <td> {addressList[0]} </td>
+        </tr>
+        <tr>
+          <td> {nameList[1]} </td>
+          <td> {addressList[1]} </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+    );
+  }
+
 
 render(){
-  console.log("we are in DataLookup" + this.props.userLong + " a " + this.props.userLat +  " b  "+ this.state.closest[1]);
 	return(
 		<div className ='dataLookUpCont'>
         <p> we are in the data look up </p>
+        <div> {console.log(this.state.closest[0])} </div>
         <button onClick={this.accessData}> Find your Nearest Location</button>
+
+         <p> We are under the map </p>
+         {this.printToTable()}
+
 		<Mapit locs = {this.state.closest} userLat = {this.props.userLat} userLong = {this.props.userLong} />
+    
 
-
+  
 
 		</div>
 		)
