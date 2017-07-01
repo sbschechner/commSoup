@@ -31,7 +31,7 @@ class DataLookUp extends Component {
  		},
  		{
  			"id": "666666",
- 			"LocName" : "Location 2's sweet cool name",
+ 			"LocName" : "Location 2's cool name",
  			"address": "101 main street",
  			"LocLat" : 41.2374383,
  			"LocLong" : -72.9970302,
