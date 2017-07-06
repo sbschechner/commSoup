@@ -11,13 +11,9 @@ export default function App(props) {
             <div className="app">
                 <header className = "navBar">
                     <div className ='navBarLinks'>
-                      <h1><Link to="/">CommSoup</Link></h1>
-                      <h1> <Link to="/results"> How it Works </Link> </h1>
                     </div>
                 </header>
                 <main>
-                    <Route exact path="/" component={DateTime} />
-                    <Route exact path="/" component={LocInput} />
                     <p> text </p>
                 <DateTime />
                 <LocInput />

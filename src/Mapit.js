@@ -5,13 +5,6 @@ import './Mapit.css';
 
 class Mapit extends Component {
 
-
-
-//I THINK THEY ARE RENDERING BUT SO FAR AWAY - need to adjust center of map to reload and update based on center
-//mapCenter on https://www.npmjs.com/package/google-maps-react
-
-
-
 render(){
 	return(
 		<div className ='MapRenderCont'>
@@ -19,20 +12,11 @@ render(){
         style={{width: '85%', height: '100%', position: 'relative'}}
         className={'map'}
 
+        //this makes sure the maps update to where the user is
+      initialCenter ={{lat: this.props.userLat, lng: this.props.userLong}}
         >
-  <Marker
-    name={'User'}
-    position={{lat: this.props.userLat, lng: this.props.userLong}} />
-  
-  <Marker
-      name={'Loc 1'}
-          position={{lat: this.props.locs[0].LocLat, lng: this.props.locs[0].LocLong}} />
-        <Marker />
-    
-  <Marker
-      name={'Loc 2'}
-          position={{lat: this.props.locs[1].LocLat, lng: this.props.locs[1].LocLong}} />
-        <Marker />
+
+
 
     </Map>
     </div>
@@ -41,15 +25,26 @@ render(){
 	}
 
 }
+/*
+  <Marker
+    name={'User'}
+    position={{lat: this.props.userLat, lng: this.props.userLong}} />
+  
+
+    
+  <Marker
+      name={'Loc 2'}
+          position={{lat: this.props.locs[1].LocLat, lng: this.props.locs[1].LocLong}} />
+        <Marker />
+
+*/
 
   Map.defaultProps = {
-    zoom: 10,
+    zoom: 15,
     //set in NYC
     initialCenter: {
-      lat: 40.2372163,
-      lng: -73.99669639999999
-    },
-    center: {
+      lat: 22.9,
+      lng: 89.0
     },
     centerAroundCurrentLocation: false,
     visible: true

@@ -32,16 +32,14 @@ zipToLocation(){
   fetch(URL).then((response) => response.json())
      
      .then(data => {
-        console.log("hello", data.lat);
+        console.log("hello - we have hit the api for zip");
+        console.log(data.lat);
+        console.log(data);
         //THIS IS NOT GOING TO STATE BUT INSTEAD THIS OF MAPS.  
         this.setState({
             latitude : data.lat,
             longitude: data.lng,
         })
-    
-    .catch(function(err){
-        console.log ("the errorr is " + err);
-      });
     }
   )
 }
