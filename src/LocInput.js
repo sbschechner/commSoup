@@ -23,7 +23,7 @@ locationCheck(){
 	else if (!this.props.isGeolocationEnabled){
 		return (
 		<div>
-		<p> Geolocation is not enabled </p>
+		<p> Unfortunately, Geolocation is not enabled </p>
 		<ManualLoc />
 		</div>
 		)
@@ -34,14 +34,15 @@ locationCheck(){
 			<div>
 				<p> Latitude {this.props.coords.latitude} </p>
 				<p> Longitude {this.props.coords.longitude} </p>
-        		<DataLookUp userLat = {this.props.coords.latitude} userLong = {this.props.coords.longitude} />
+				<p> We have located where you are </p>
+        		<DataLookUp userLat = {this.props.coords.latitude} userLong = {this.props.coords.longitude} hasLocation= "yes" />
         	</div>
         	)
 		}
 	
 	else {
 		return(
-			<p> finding </p>
+			<p> finding you</p>
 			)
 	}
 

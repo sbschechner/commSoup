@@ -6,6 +6,7 @@ class DataLookUp extends Component {
   constructor(props){
     super(props);
     this.state = {
+      haveData: false,
     	KitchData_MockData: [
     	{	
  			"id": "1111111",
@@ -27,45 +28,44 @@ class DataLookUp extends Component {
  			"id": "7777777",
  			"LocName" : "Location 1",
  			"address" : "89 broadway",
- 			"LocLat" : 39.2374383,
- 			"LocLong" : -73.9970302
+ 			"LocLat" : 40.830911,
+ 			"LocLong" : -73.908384
  		},
  		{
  			"id": "666666",
  			"LocName" : "Location 2's cool name",
  			"address": "101 main street",
- 			"LocLat" : 41.2374383,
- 			"LocLong" : -72.9970302,
+ 			"LocLat" : 40.681599,
+ 			"LocLong" : -73.961306,
  		}
     	],
        };
 
 this.accessData = this.accessData.bind(this);
 this.printToTable = this.printToTable.bind(this);
+this.showGetResults = this.showGetResults.bind(this);
 
     }
 
-accessData(){ //THIS SHOULD FIND THE TOP 5 CLOSEST?
-//this should make a get request to my data base to get all the data.
-//should take props.userLat and userLong
-//should then do the required math on each entry to figure out the distance between me and location
-//maybe find the distance and add as variable? 
-//the math can be done on the server side.....? as in it requires lat and long and returns top 5 that are closest?
-//it essentially would be a find min (there is an array for this) but 5 times....
-//like Math.min and spread operator
-//return the top 5 shortest
-//will need to store the top 5 shortest 
-//https://stackoverflow.com/questions/365826/calculate-distance-between-2-gps-coordinates
-	//fetch("/").response.json()
+showGetResults(){
+  if (this.props.hasLocation ==="yes"){
+  return(
+    <button onClick={this.accessData}> Find your 5 Nearest Locations </button>
+    )
+  }
+}
+
+accessData(){ //THIS SHOULD FIND THE TOP 5 CLOSEST
+//not sure exactly what it returns yet because having some issus printing it
 console.log("accesing the data base");
-//var url = "/soupKitchens?lat="+this.props.userLat + "&"+ long=12.232323;
+//var url = "/soupKitchensNearest?lat="+this.props.userLat + "&long="+this.props.userLong;
+//console.log(url)
 /*fetch(URL).then((response) => response.json())
-     
+
      .then(data => {
-        console.log("hello - we have hit the api for zip");
+        console.log("hello - we have hit endpoint for the DB");
         console.log(data.lat);
-        console.log(data);
-        //THIS IS NOT GOING TO STATE BUT INSTEAD THIS OF MAPS.  
+        console.log(data); 
         this.setState({
             latitude : data.lat,
             longitude: data.lng,
@@ -76,11 +76,15 @@ console.log("accesing the data base");
       });
 //
 */
+   this.setState({
+    haveData: true
+   })
 }
 
-//needs double for loops
+//nameList index number might change based on returned data
 
 printToTable(){  
+if (this.state.haveData === true){
 var resultsList =[];
 var addressList =[];
 var nameList =[]
@@ -109,9 +113,11 @@ for(var i=0; this.state.closest.length>i; i++){
         </tr>
       </tbody>
     </table>
+    <Mapit locs = {this.state.closest} userLat = {this.props.userLat} userLong = {this.props.userLong} />
   </div>
     );
   }
+}
 
 
 render(){
@@ -119,19 +125,10 @@ render(){
 		<div className ='dataLookUpCont'>
         <p> we are in the data look up </p>
         <div> {console.log(this.state.closest[0])} </div>
-        <button onClick={this.accessData}> Find your Nearest Location</button>
-        <div>
-        </div>
-        <button onClick={this.printToTable}> find results</button>
-         {this.printToTable()}
-
-         <p> We are under the map </p>
-
-		<Mapit locs = {this.state.closest} userLat = {this.props.userLat} userLong = {this.props.userLong} />
-    
-
-  
-
+        {this.showGetResults()}
+        <p> We are above the map and the results table </p>
+        {this.printToTable()}
+        
 		</div>
 		)
 	}

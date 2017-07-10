@@ -5,18 +5,32 @@ import './Mapit.css';
 
 class Mapit extends Component {
 
+
 render(){
 	return(
 		<div className ='MapRenderCont'>
-      <Map className ="mapper" google={this.props.google}
+      <Map className ="mapper" google={this.props.google} 
         style={{width: '85%', height: '100%', position: 'relative'}}
-        className={'map'}
 
-        //this makes sure the maps update to where the user is
+        //this makes sure the maps update to where the user is for automatic geolocation
       initialCenter ={{lat: this.props.userLat, lng: this.props.userLong}}
         >
 
 
+  <Marker
+    name={'User'}
+    position={{lat: this.props.userLat, lng: this.props.userLong}} 
+    />
+
+  <Marker
+      name={'Loc 1'}
+          position={{lat: this.props.locs[0].LocLat, lng: this.props.locs[0].LocLong}} />
+        <Marker />
+
+  <Marker
+      name={'Loc 2'}
+          position={{lat: this.props.locs[1].LocLat, lng: this.props.locs[1].LocLong}} />
+        <Marker />
 
     </Map>
     </div>
@@ -25,28 +39,12 @@ render(){
 	}
 
 }
-/*
-  <Marker
-    name={'User'}
-    position={{lat: this.props.userLat, lng: this.props.userLong}} />
-  
 
-    
-  <Marker
-      name={'Loc 2'}
-          position={{lat: this.props.locs[1].LocLat, lng: this.props.locs[1].LocLong}} />
-        <Marker />
-
-*/
 
   Map.defaultProps = {
-    zoom: 15,
-    //set in NYC
-    initialCenter: {
-      lat: 22.9,
-      lng: 89.0
-    },
-    centerAroundCurrentLocation: false,
+    zoom: 12,
+    centerAroundCurrentLocation: true,
+    initialCenter : {lat: 40.7589, lng: -73.981},
     visible: true
   };
 
