@@ -1,37 +1,85 @@
 import React, { Component } from 'react';
-import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
+import {Map, Marker, GoogleApiWrapper, InfoWindow} from 'google-maps-react';
 import './Mapit.css';
 
 
 class Mapit extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      showingInfoWindow: false,
+      activeMarker: {},
+      selectedPlace: {},
+        };
+
+    this.onMarkerClick = this.onMarkerClick.bind(this);
+    this.onMapClicked = this.onMapClicked.bind(this);
+      }
+
+onMarkerClick(props, marker) {
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+    });
+  }
+
+  onMapClicked(props) {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      })
+    }
+  }
 
 
 render(){
 	return(
 		<div className ='MapRenderCont'>
       <Map className ="mapper" google={this.props.google} 
-        style={{width: '85%', height: '100%', position: 'relative'}}
+        style={{width: '85%', height: '100%', position: 'absolute'}}
 
         //this makes sure the maps update to where the user is for automatic geolocation
       initialCenter ={{lat: this.props.userLat, lng: this.props.userLong}}
+      
+      //needed for info window component
+      onClick={this.onMapClicked}  
+
         >
 
 
   <Marker
     name={'User'}
     position={{lat: this.props.userLat, lng: this.props.userLong}} 
+    onClick={this.onMarkerClick}
     />
 
   <Marker
-      name={'Loc 1'}
-          position={{lat: this.props.locs[0].LocLat, lng: this.props.locs[0].LocLong}} />
-        <Marker />
+      name={this.props.locs[0].LocName}
+      hours = {'10AM to now'}
+      position={{lat: this.props.locs[0].LocLat, lng: this.props.locs[0].LocLong}} 
+      onClick={this.onMarkerClick}
+     />
+
+
 
   <Marker
-      name={'Loc 2'}
-          position={{lat: this.props.locs[1].LocLat, lng: this.props.locs[1].LocLong}} />
-        <Marker />
+      name={this.props.locs[1].LocName}
+      hours={'1pm to 5pm'}
+      position={{lat: this.props.locs[1].LocLat, lng: this.props.locs[1].LocLong}}
+      onClick={this.onMarkerClick}
+      />
 
+    <InfoWindow
+      marker={this.state.activeMarker}
+      visible={this.state.showingInfoWindow}>
+        <div>
+          <h1>{this.state.selectedPlace.name}</h1>
+          <h3> Operating Hours: {this.state.selectedPlace.hours} </h3>
+        </div>
+    </InfoWindow>
+    
     </Map>
     </div>
 		)

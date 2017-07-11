@@ -65,8 +65,3 @@ export default geolocated({
   },
   userDecisionTimeout: 100
 }) (LocInput);
-
-
-//export default LocInput;
-// ..... what does the correct export look like	
-//https://www.npmjs.com/package/react-geolocated

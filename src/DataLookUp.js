@@ -58,13 +58,13 @@ showGetResults(){
 accessData(){ //THIS SHOULD FIND THE TOP 5 CLOSEST
 //not sure exactly what it returns yet because having some issus printing it
 console.log("accesing the data base");
-//var url = "/soupKitchensNearest?lat="+this.props.userLat + "&long="+this.props.userLong;
-//console.log(url)
+var url = "/soupKitchensNearest?lat="+this.props.userLat + "&long="+this.props.userLong;
+console.log(url)
 /*fetch(URL).then((response) => response.json())
 
      .then(data => {
         console.log("hello - we have hit endpoint for the DB");
-        console.log(data.lat);
+        console.log(data.FIELD1);
         console.log(data); 
         this.setState({
             latitude : data.lat,
@@ -74,7 +74,6 @@ console.log("accesing the data base");
     .catch(function(err){
         console.log ("the errorr is " + err);
       });
-//
 */
    this.setState({
     haveData: true

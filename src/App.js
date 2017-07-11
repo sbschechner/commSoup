@@ -7,6 +7,7 @@ import LocInput from './LocInput';
 
 export default function App(props) {
     return (
+        <div>
         <Router>
             <div className="app">
                 <header className = "navBar">
@@ -18,7 +19,13 @@ export default function App(props) {
                 <DateTime />
                 <LocInput />
                 </main>
+                <p> down here</p>
             </div>
         </Router>
+        <div className = "footer" >
+          <h2> we are here in the app </h2>
+        </div>
+        </div>
+
     );
 }
