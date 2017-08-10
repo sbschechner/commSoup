@@ -74,12 +74,7 @@ accessData(){ //THIS SHOULD FIND THE TOP 5 CLOSEST
 //not sure exactly what it returns yet because having some issus printing it
 console.log("accesing the data base");
 var url = "https://evening-thicket-30478.herokuapp.com/soupKitchens"
-console.log(url)
-var closestArr = [300,299];
-var idArr = [];
-var userLat = this.props.userLat;
-var userLong = this.props.userLong;
-fetch("https://evening-thicket-30478.herokuapp.com/soupKitchens", {
+fetch(url, {
   headers: {
     'Accept': 'application/json'
   }
@@ -102,7 +97,7 @@ fetch("https://evening-thicket-30478.herokuapp.com/soupKitchens", {
 
       for(var i=1;i<data.kitchens.length;i++){
 
-         var currentLat = data.kitchens[i].lat;
+      var currentLat = data.kitchens[i].lat;
       var currentLong = data.kitchens[i].long;
       var currentDistance = this.findDistance(this.props.userLat, this.props.userLong, currentLat,currentLong)
       var currentObj = {
@@ -112,8 +107,22 @@ fetch("https://evening-thicket-30478.herokuapp.com/soupKitchens", {
 
       orderedPlaces.push(currentObj);
     }
-
+    console.log("orderedPlaces object");
     console.log(orderedPlaces)
+
+    var sortable = [];
+    for (var item in orderedPlaces) {
+      sortable.push([item, orderedPlaces[item]]);
+    }
+
+        console.log("sorted?");
+    console.log(sortable);
+
+    sortable.sort(function(a, b) {
+    return a[1] - b[1];
+      });
+
+
             }) //only have access to data between here and fetch
 
 
@@ -121,7 +130,9 @@ fetch("https://evening-thicket-30478.herokuapp.com/soupKitchens", {
       console.error(error)
       }) 
 
-   this.setState({ //have data is important to be true to get print to table to print
+
+//will need to set state with the closest data
+   this.setState({ //have data is important to be true to get print to table to print 
     haveData: true
    })
   
