@@ -108,20 +108,23 @@ fetch(url, {
       orderedPlaces.push(currentObj);
     }
     console.log("orderedPlaces object");
-    console.log(orderedPlaces)
+    console.log(orderedPlaces);
+
 
     var sortable = [];
+    var closestArr =[];
     for (var item in orderedPlaces) {
-      sortable.push([item, orderedPlaces[item]]);
+      sortable.push([orderedPlaces[item].id, orderedPlaces[item].dist]); // creates an array of the object with position and distance,
     }
 
-        console.log("sorted?");
-    console.log(sortable);
-
+    
     sortable.sort(function(a, b) {
-    return a[1] - b[1];
-      });
-
+      return a[1] - b[1];
+    });
+  
+        
+    console.log("sorted?");
+    console.log(sortable); //it is actually sorted list of places now. 
 
             }) //only have access to data between here and fetch
 
@@ -131,7 +134,8 @@ fetch(url, {
       }) 
 
 
-//will need to set state with the closest data
+//will need to set state with the closest data for each of the top locations and will make sep fetch calls for each of them
+
    this.setState({ //have data is important to be true to get print to table to print 
     haveData: true
    })
