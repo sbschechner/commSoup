@@ -36,9 +36,10 @@ onMarkerClick(props, marker) {
 
 render(){
 	return(
-		<div className ='MapRenderCont'>
+		<div className="mapContainer">
+    <div className ='MapRenderCont'>
       <Map className ="mapper" google={this.props.google} 
-        style={{width: '85%', height: '100%', position: 'absolute'}}
+        style={{width: '85%', height: '85%', position: 'relative'}}
 
         //this makes sure the maps update to where the user is for automatic geolocation
       initialCenter ={{lat: this.props.userLat, lng: this.props.userLong}}
@@ -82,6 +83,7 @@ render(){
     
     </Map>
     </div>
+    </div>
 		)
 
 	}
@@ -98,6 +100,7 @@ render(){
 
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyA0nidzDD_rDGc7MUldzJ68MaC2naf3tyI"
+  apiKey: "AIzaSyA0nidzDD_rDGc7MUldzJ68MaC2naf3tyI",
+  version:3.27
 }) (Mapit)
 

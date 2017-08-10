@@ -61,7 +61,7 @@ render() {
       Lets do it manually!
         <form>
         <label>
-         Please enter your zip code:
+         Please enter your NYC zip code:
             <input type='number' defaultValue = {this.state.tempZip}  onChange = {this.changeTempNumber}/>
             </label>
             <input type="submit" value="Submit Zip" onClick = {this.handleClick}/>
