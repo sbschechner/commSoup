@@ -7,22 +7,11 @@ class DataLookUp extends Component {
     super(props);
     this.state = {
       haveData: false,
-    	KitchData_MockData: [
-    	{	
- 			"id": "1111111",
- 			"LocName" : "Soup Kitch",
- 			"LocLat" : 999999,
- 			"LocLong" : 33333333
- 		},
+    	locLats:[],
+      locLongs:[],
+      locNames:[],
+      locAddress:[],
 
- 		{
- 			"id": "222222",
- 			"LocName" : "Community Kitch",
- 			"LocLat" : 4444444,
- 			"LocLong" : 111111,
- 		}
-    	],
-    	
     	closest :[
     	{	
  			"id": "7777777",
@@ -70,8 +59,8 @@ findDistance(userLat, userLong, dataLat, dataLong){
 
     }
 
+
 accessData(){ //THIS SHOULD FIND THE TOP 5 CLOSEST
-//not sure exactly what it returns yet because having some issus printing it
 console.log("accesing the data base");
 var url = "https://evening-thicket-30478.herokuapp.com/soupKitchens"
 fetch(url, {
@@ -83,7 +72,6 @@ fetch(url, {
   
      .then(data => {
         console.log("hello - we have hit endpoint for the DB");
-        console.log(data);
 
       var orderedPlaces = [];
       var dataLat = data.kitchens[0].lat;
@@ -107,12 +95,9 @@ fetch(url, {
 
       orderedPlaces.push(currentObj);
     }
-    console.log("orderedPlaces object");
-    console.log(orderedPlaces);
 
 
     var sortable = [];
-    var closestArr =[];
     for (var item in orderedPlaces) {
       sortable.push([orderedPlaces[item].id, orderedPlaces[item].dist]); // creates an array of the object with position and distance,
     }
@@ -122,42 +107,62 @@ fetch(url, {
       return a[1] - b[1];
     });
   
+    
+   //location show represents the number of shown locations
+  var closeLats =[];
+  var closeLongs =[];
+  var closeNames =[];
+  var closeAddress=[];
+
+  for(var p=1; p<4; p++){
+    var urlLoc = "https://evening-thicket-30478.herokuapp.com/soupKitchensSpecific?kitchId="+sortable[p][0]
+    fetch(urlLoc, {
+    headers: {
+      'Accept': 'application/json'
+      }
+
+      }).then((response) => response.json())
+      .then(data => {
         
-    console.log("sorted?");
-    console.log(sortable); //it is actually sorted list of places now. 
+        console.log("hello - we have hit endpoint for the specific kitchen DB");
+        closeLongs.push(data.lat);
+        closeLats.push(data.long);
+        closeNames.push(data.name);
+        closeAddress.push(data.street_ad);
+      })
 
-            }) //only have access to data between here and fetch
-
+        .catch(error =>{
+      console.error(error)  
+    })
+      
+      }
+      this.setState({
+        locLats: closeLats,
+        locLongs : closeLongs,
+        locNames : closeNames,
+        locAddress : closeAddress,
+      })
+       //only have access to data between here and fetch
+     })
 
       .catch(error =>{
       console.error(error)
       }) 
 
-
-//will need to set state with the closest data for each of the top locations and will make sep fetch calls for each of them
+     
 
    this.setState({ //have data is important to be true to get print to table to print 
     haveData: true
    })
-  
-
-  } // close the access data
-
+  }
 
 //nameList index number might change based on returned data
 
 printToTable(){  
 if (this.state.haveData === true){
-var resultsList =[];
-var addressList =[];
-var nameList =[]
-
-for(var i=0; this.state.closest.length>i; i++){
-     resultsList = Object.values(this.state.closest[i])
-      nameList.push(resultsList[1]);
-      addressList.push(resultsList[2]);
-      }
-      
+  var testingAddress = this.state.locAddress;
+  console.log(this.state.locAddress);
+  console.log(testingAddress)
   return (
   <div>
     <table>
@@ -167,12 +172,16 @@ for(var i=0; this.state.closest.length>i; i++){
           <th> address </th>
         </tr>
         <tr>
-          <td> {nameList[0]} </td>
-          <td> {addressList[0]} </td>
+          <td> hello {testingAddress[0]} </td>
+          <td> {this.state.locAddress[0]} </td>
         </tr>
         <tr>
-          <td> {nameList[1]} </td>
-          <td> {addressList[1]} </td>
+          <td> {this.state.locNames[1]} </td>
+          <td> {this.state.locAddress[1]} </td>
+        </tr>
+        <tr>
+          <td> {this.state.locNames[2]} </td>
+          <td> {this.state.locAddress[2]} </td>
         </tr>
       </tbody>
     </table>
@@ -188,11 +197,10 @@ render(){
 	return(
 		<div className ='dataLookUpCont'>
         <p> we are in the data look up </p>
-        <div> {console.log(this.state.closest[0])} </div>
+       
         {this.showGetResults()}
         <p> We are above the map and the results table </p>
-        {this.printToTable()}
-        
+        {this.printToTable()}       
 		</div>
 		)
 	}
