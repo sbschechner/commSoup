@@ -11,23 +11,7 @@ class DataLookUp extends Component {
       locLongs:[],
       locNames:[],
       locAddress:[],
-
-    	closest :[
-    	{	
- 			"id": "7777777",
- 			"LocName" : "Location 1",
- 			"address" : "89 broadway",
- 			"LocLat" : 40.830911,
- 			"LocLong" : -73.908384
- 		},
- 		{
- 			"id": "666666",
- 			"LocName" : "Location 2's cool name",
- 			"address": "101 main street",
- 			"LocLat" : 40.681599,
- 			"LocLong" : -73.961306,
- 		}
-    	],
+      locHours:[],
        };
 
 this.accessData = this.accessData.bind(this);
@@ -113,7 +97,7 @@ fetch(url, {
   var closeLongs =[];
   var closeNames =[];
   var closeAddress=[];
-
+  var closeHours=[];
   for(var p=1; p<4; p++){
     var urlLoc = "https://evening-thicket-30478.herokuapp.com/soupKitchensSpecific?kitchId="+sortable[p][0]
     fetch(urlLoc, {
@@ -125,10 +109,11 @@ fetch(url, {
       .then(data => {
         
         console.log("hello - we have hit endpoint for the specific kitchen DB");
-        closeLongs.push(data.lat);
-        closeLats.push(data.long);
+        closeLongs.push(parseFloat(data.long));
+        closeLats.push(parseFloat(data.lat));
         closeNames.push(data.name);
         closeAddress.push(data.street_ad);
+        closeHours.push(data.hours);
       })
 
         .catch(error =>{
@@ -141,6 +126,7 @@ fetch(url, {
         locLongs : closeLongs,
         locNames : closeNames,
         locAddress : closeAddress,
+        locHours : closeHours,
       })
        //only have access to data between here and fetch
      })
@@ -186,8 +172,8 @@ if (this.state.haveData === true){
       </tbody>
     </table>
     <p> the locations are listed on the map below </p>
-    <Mapit locs = {this.state.closest} userLat = {this.props.userLat} userLong = {this.props.userLong} />
-  </div>
+    <Mapit locationLats = {this.state.locLats} locationLongs ={this.state.locLongs} locationNames = {this.state.locNames} userLat = {this.props.userLat} userLong = {this.props.userLong} />
+  </div> //NEED TO GET HOURS FROM THE DATA. 
     );
   }
 }

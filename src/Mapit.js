@@ -57,18 +57,18 @@ render(){
     />
 
   <Marker
-      name={this.props.locs[0].LocName}
+      name={this.props.locationNames[0]}
       hours = {'10AM to now'}
-      position={{lat: this.props.locs[0].LocLat, lng: this.props.locs[0].LocLong}} 
+      position={{lat: this.props.locationLats[0], lng: this.props.locationLongs[0]}} 
       onClick={this.onMarkerClick}
      />
 
 
 
   <Marker
-      name={this.props.locs[1].LocName}
+      name={this.props.locationNames[1]}
       hours={'1pm to 5pm'}
-      position={{lat: this.props.locs[1].LocLat, lng: this.props.locs[1].LocLong}}
+      position={{lat: this.props.locationLats[1], lng: this.props.locationLongs[1]}}
       onClick={this.onMarkerClick}
       />
 
