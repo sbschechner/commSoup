@@ -18,7 +18,6 @@ this.accessData = this.accessData.bind(this);
 this.printToTable = this.printToTable.bind(this);
 this.showGetResults = this.showGetResults.bind(this);
 this.findDistance = this.findDistance.bind(this);
-
     }
 
 showGetResults(){
@@ -46,6 +45,15 @@ findDistance(userLat, userLong, dataLat, dataLong){
 
 accessData(){ //THIS SHOULD FIND THE TOP 5 CLOSEST
 console.log("accesing the data base");
+  var closeLats =[];
+  var closeLongs =[];
+  var closeNames =[];
+  var closeAddress=[399,];
+  var closeHours=[];
+var updateCheck = {
+  firstAnswer :false
+}
+console.log("line 56", updateCheck)
 var url = "https://evening-thicket-30478.herokuapp.com/soupKitchens"
 fetch(url, {
   headers: {
@@ -93,11 +101,11 @@ fetch(url, {
   
     
    //location show represents the number of shown locations
-  var closeLats =[];
-  var closeLongs =[];
-  var closeNames =[];
-  var closeAddress=[];
-  var closeHours=[];
+    updateCheck[sortable[1][0]] = false;
+    updateCheck[sortable[2][0]] = false;
+    updateCheck[sortable[3][0]] = false;
+   
+
   for(var p=1; p<4; p++){
     var urlLoc = "https://evening-thicket-30478.herokuapp.com/soupKitchensSpecific?kitchId="+sortable[p][0]
     fetch(urlLoc, {
@@ -114,20 +122,41 @@ fetch(url, {
         closeNames.push(data.name);
         closeAddress.push(data.street_ad);
         closeHours.push(data.hours);
+        
       })
-
         .catch(error =>{
       console.error(error)  
     })
-      
-      }
-      this.setState({
-        locLats: closeLats,
-        locLongs : closeLongs,
-        locNames : closeNames,
-        locAddress : closeAddress,
-        locHours : closeHours,
+      console.log("did it update table --- on 136", sortable[p][0])
+      updateCheck.firstAnswer=true;
+      updateCheck[sortable[p][0]] = true;
+      console.log(updateCheck);
+      console.log("line 137", closeAddress);
+     
+      } //closes for loop
+
+      console.log("on line 140", closeAddress);
+        console.log("we are on 141", closeAddress.length);
+    
+console.log("we areline 143", updateCheck);
+
+let result = Object.values(updateCheck).find(entry => { return entry === false })
+console.log(result);
+  if (result===false) {
+  console.log("we are stil updating");
+  }  
+else {
+  console.log("we gonna update the statttteeeeee")
+    this.setState({
+      locLats: closeLats,
+      locLongs : closeLongs,
+      locNames : closeNames,
+      locAddress : closeAddress,
+      locHours : closeHours,
+      haveData: true
       })
+  }
+
        //only have access to data between here and fetch
      })
 
@@ -135,18 +164,14 @@ fetch(url, {
       console.error(error)
       }) 
 
-     
+}
 
-   this.setState({ //have data is important to be true to get print to table to print 
-    haveData: true
-   })
-  }
 
-//nameList index number might change based on returned data
 
 printToTable(){  
 if (this.state.haveData === true){
   var testingAddress = this.state.locAddress;
+  console.log("this is the loc address in the state" )
   console.log(this.state.locAddress);
   console.log(testingAddress)
   return (
@@ -159,8 +184,9 @@ if (this.state.haveData === true){
         </tr>
         <tr>
           <td> hello {testingAddress[0]} </td>
-          <td> {this.state.locAddress[0]} </td>
-        </tr>
+          <td>{this.state.locAddress[0]}</td>
+          <td> {testingAddress.length} </td>
+         </tr>
         <tr>
           <td> {this.state.locNames[1]} </td>
           <td> {this.state.locAddress[1]} </td>

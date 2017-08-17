@@ -72,6 +72,13 @@ render(){
       onClick={this.onMarkerClick}
       />
 
+    <Marker
+      name={this.props.locationNames[2]}
+      hours={'1pm to 5pm'}
+      position={{lat: this.props.locationLats[2], lng: this.props.locationLongs[2]}}
+      onClick={this.onMarkerClick}
+      />
+
     <InfoWindow
       marker={this.state.activeMarker}
       visible={this.state.showingInfoWindow}>
