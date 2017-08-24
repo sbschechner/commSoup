@@ -2,14 +2,8 @@
   text-align: center;
 }
 
-.navBar{
-  background: yellow;
+body{
+  background: black;
+  color: white;
 }
 
-.navBarLinks{
-  display: inline-flex;
-}
-
-.navBarLinks > h1{
-  padding-left: 25%;
-}
