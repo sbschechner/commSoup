@@ -17,24 +17,24 @@ class DataTable extends Component {
 					<tbody>
 						<tr>
 							<th> Name </th>
-							<th> address </th>
+							<th> Address </th>
 						</tr>
 						<tr>
 							<td> {this.props.locationNames[0]} </td>
-							<td> {this.props.locationAdd[1]}</td>
+							<td> {this.props.locationAdd[0]}</td>
 						</tr>
 						<tr>
 							<td> {this.props.locationNames[1]} </td>
-							<td> {this.props.locationAdd[2]}</td>
+							<td> {this.props.locationAdd[1]}</td>
 						</tr>
 						<tr>
 							<td> {this.props.locationNames[2]}</td>
-							<td> {this.props.locationAdd[3]}</td>
+							<td> {this.props.locationAdd[2]}</td>
 						</tr>
 					</tbody>
 				</table>
 
-				<p> the locations are below with listed operating hours </p>
+				<p> The locations are placed below - Click marker for listed operating hours </p>
 
 			</div>
 		)

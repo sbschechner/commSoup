@@ -24,7 +24,7 @@ class DataLookUp extends Component {
   showGetResults() {
     if (this.props.hasLocation === "yes") {
       return (
-        <button onClick={this.accessData}> Find your 5 Nearest Locations </button>
+        <button onClick={this.accessData}> Find your 3 Nearest Locations in NYC </button>
       )
     }
   }
@@ -44,17 +44,17 @@ class DataLookUp extends Component {
   }
 
 
-  accessData() { //THIS SHOULD FIND THE TOP 5 CLOSEST
-    // console.log("accesing the data base");
+  accessData() { //THIS SHOULD FIND THE TOP 3 CLOSEST
+     console.log("accesing the data base");
     var closeLats = [];
     var closeLongs = [];
     var closeNames = [];
-    var closeAddress = [399,];
+    var closeAddress = [];
     var closeHours = [];
     var updateCheck = {
       firstAnswer: false
     }
-    // console.log("line 56", updateCheck)
+
     var url = "https://evening-thicket-30478.herokuapp.com/soupKitchens"
     fetch(url, {
       headers: {
@@ -64,7 +64,7 @@ class DataLookUp extends Component {
     }).then((response) => response.json())
 
       .then(data => {
-        // console.log("hello - we have hit endpoint for the DB");
+         console.log("hello - we have hit endpoint for the DB");
 
         var orderedPlaces = [];
         var dataLat = data.kitchens[0].lat;
@@ -135,8 +135,8 @@ class DataLookUp extends Component {
           self.setState({
             locLats: closeLats,
             locLongs: closeLongs,
-            locNames: closeNames, //SHOULD BE closeNames
-            locAddress: closeAddress, //SHOULD BE closeAddress when done testing
+            locNames: closeNames, 
+            locAddress: closeAddress, 
             locHours: closeHours,
             haveData: true
           });
@@ -150,10 +150,7 @@ class DataLookUp extends Component {
 
   printToTable() {
     if (this.state.haveData === true) {
-      var testingAddress = this.state.locAddress;
-      // console.log("this is the loc address in the state", this.state.locAddress) //WHY show 6 and 10 but wont print locLats array?
-      // console.log("this is the latitudes in the state", this.state.locLats) //THIS IS PRINTING AN EMPTY ARRAY?
-      // console.log(testingAddress)
+      
       return (
         <div>
           <DataTable locationNames={this.state.locNames} locationAdd={this.state.locAddress} />
@@ -167,10 +164,7 @@ class DataLookUp extends Component {
   render() {
     return (
       <div className='dataLookUpCont'>
-        <p> we are in the data look up </p>
-
         {this.showGetResults()}
-        <p> We are above the map and the results table </p>
         {this.printToTable()}
       </div>
     )

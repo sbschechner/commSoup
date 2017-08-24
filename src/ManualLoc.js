@@ -58,7 +58,6 @@ foundLocationReport(){
 render() { 
     return(
       <div className ="ManualLocCont">
-      Lets do it manually!
         <form>
         <label>
          Please enter your NYC zip code:

@@ -13,15 +13,11 @@ export default function App(props) {
                     </div>
                 </header>
                 <main>
-                    <p> text </p>
+                    <h1> Around The Neighborhood </h1>
                 <DateTime />
                 <LocInput />
                 </main>
-                <p> down here</p>
             </div>
-        <div className = "footer" >
-          <h2> we are here in the app </h2>
-        </div>
         </div>
 
     );
