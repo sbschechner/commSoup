@@ -23,7 +23,7 @@ mealChange(){
 	if (this.state.currentHour >8  && this.state.currentHour <11) {
 		return(
 			<div className="mealTime">
-				<h3> It is BreakFast Time </h3>
+				<h5> It is BreakFast Time </h5>
 			</div>
 			)
 	}
@@ -31,7 +31,7 @@ mealChange(){
 	else if (this.state.currentHour >=12 && this.state.currentHour <15){
 		return(
 			<div className = "mealTime">
-				<h3> It is Lunch Time </h3>
+				<h5> It is Lunch Time </h5>
 			</div>
 			)
 	}
@@ -39,14 +39,14 @@ mealChange(){
 	else if (this.state.currentHour >18 && this.state.currentHour <20){
 		return(
 			<div className = "mealTime">
-				<h3> It is Dinner Time </h3>
+				<h5> It is Dinner Time </h5>
 			</div>
 			)
 	}
 
  return(
 			<div className = "mealTime">
-				<h3> It is not time to eat </h3>
+				<h5> It is not time to eat </h5>
 			</div>
 		)
 }
@@ -56,17 +56,22 @@ mealChange(){
 componentDidMount(){ 
   var theDate = this.getDate();
   var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+  var minutes = theDate.getMinutes()
+  if(minutes<10){
+    minutes = "0"+ minutes
+
+  }
   this.setState({
   	currentDay : days[theDate.getDay()],
   	currentHour: theDate.getHours(),
-  	currentMinute: theDate.getMinutes()
+  	currentMinute: minutes
   })
 }
 
   render() { 
     return(
       <div className ="dateTimeCont">
-      	<h2> The Time is <span> {this.state.currentHour} : {this.state.currentMinute} </span> on {this.state.currentDay} </h2>
+      	<h3> The Time is <span> {this.state.currentHour} : {this.state.currentMinute} </span> on {this.state.currentDay} </h3>
       	{this.mealChange()}
      </div>
       );

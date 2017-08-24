@@ -1,0 +1,9 @@
+table{
+	padding-top: 2%;
+	margin: auto;
+}
+
+td{
+	padding-left: 5%;
+	min-width: 100px;
+}

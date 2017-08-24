@@ -23,7 +23,7 @@ locationCheck(){
 	else if (!this.props.isGeolocationEnabled){
 		return (
 		<div>
-		<p> Geolocation is not enabled </p>
+		<p> Unfortunately, Geolocation is not enabled so lets do it manually </p>
 		<ManualLoc />
 		</div>
 		)
@@ -32,16 +32,15 @@ locationCheck(){
 	else if(this.props.coords){
 		return(
 			<div>
-				<p> Latitude {this.props.coords.latitude} </p>
-				<p> Longitude {this.props.coords.longitude} </p>
-        		<DataLookUp userLat = {this.props.coords.latitude} userLong = {this.props.coords.longitude} />
+				<p> We have located where you are in the world</p>
+        		<DataLookUp userLat = {this.props.coords.latitude} userLong = {this.props.coords.longitude} hasLocation= "yes" />
         	</div>
         	)
 		}
 	
 	else {
 		return(
-			<p> finding </p>
+			<p> finding you</p>
 			)
 	}
 
@@ -64,8 +63,3 @@ export default geolocated({
   },
   userDecisionTimeout: 100
 }) (LocInput);
-
-
-//export default LocInput;
-// ..... what does the correct export look like	
-//https://www.npmjs.com/package/react-geolocated

@@ -11,6 +11,8 @@ class ManualLoc extends Component {
     	latitude: null,
     	longitude: null,
     	tempZip: null,
+        locationFound: false,
+        hasLocation : false
         };
 this.changeTempNumber = this.changeTempNumber.bind(this);
 this.handleClick = this.handleClick.bind(this);
@@ -32,33 +34,39 @@ zipToLocation(){
   fetch(URL).then((response) => response.json())
      
      .then(data => {
-        console.log("hello", data.lat);
-        //THIS IS NOT GOING TO STATE BUT INSTEAD THIS OF MAPS.  
+        console.log("hello - we have hit the api for zip");
+        console.log(data.lat);
+        console.log(data); 
         this.setState({
             latitude : data.lat,
             longitude: data.lng,
-        })
-    
-    .catch(function(err){
-        console.log ("the errorr is " + err);
-      });
+            locationFound: true,
+            hasLocation : "yes"
+        })  
     }
   )
 }
 
+foundLocationReport(){
+    if (this.state.locationFound === true){
+        return(
+            <p> We have found your location </p>
+            )
+        }
+}
 
 render() { 
     return(
       <div className ="ManualLocCont">
-      Lets do it manually!
         <form>
         <label>
-         Please enter your zip code:
+         Please enter your NYC zip code:
             <input type='number' defaultValue = {this.state.tempZip}  onChange = {this.changeTempNumber}/>
             </label>
             <input type="submit" value="Submit Zip" onClick = {this.handleClick}/>
         </form>
-        <DataLookUp userLat = {this.state.latitude} userLong = {this.state.longitude} />
+        {this.foundLocationReport()}
+        <DataLookUp userLat = {this.state.latitude} userLong = {this.state.longitude} hasLocation = {this.state.hasLocation}/>
      </div>
       );
     }
