@@ -1,5 +1,4 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import './App.css';
 import DateTime from './DateTime';
 import LocInput from './LocInput';
@@ -8,7 +7,6 @@ import LocInput from './LocInput';
 export default function App(props) {
     return (
         <div>
-        <Router>
             <div className="app">
                 <header className = "navBar">
                     <div className ='navBarLinks'>
@@ -21,7 +19,6 @@ export default function App(props) {
                 </main>
                 <p> down here</p>
             </div>
-        </Router>
         <div className = "footer" >
           <h2> we are here in the app </h2>
         </div>

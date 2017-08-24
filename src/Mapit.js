@@ -51,14 +51,14 @@ render(){
 
 
   <Marker
-    name={'User'}
+    name={'You Are Here'}
     position={{lat: this.props.userLat, lng: this.props.userLong}} 
     onClick={this.onMarkerClick}
     />
 
   <Marker
       name={this.props.locationNames[0]}
-      hours = {'10AM to now'}
+      hours = {this.props.locationHours[0]}
       position={{lat: this.props.locationLats[0], lng: this.props.locationLongs[0]}} 
       onClick={this.onMarkerClick}
      />
@@ -67,24 +67,24 @@ render(){
 
   <Marker
       name={this.props.locationNames[1]}
-      hours={'1pm to 5pm'}
+      hours={this.props.locationHours[1]}
       position={{lat: this.props.locationLats[1], lng: this.props.locationLongs[1]}}
       onClick={this.onMarkerClick}
       />
 
     <Marker
       name={this.props.locationNames[2]}
-      hours={'1pm to 5pm'}
+      hours={this.props.locationHours[2]}
       position={{lat: this.props.locationLats[2], lng: this.props.locationLongs[2]}}
       onClick={this.onMarkerClick}
       />
 
     <InfoWindow
       marker={this.state.activeMarker}
-      visible={this.state.showingInfoWindow}>
+      visible={this.state.showingInfoWindow} >
         <div>
           <h1>{this.state.selectedPlace.name}</h1>
-          <h3> Operating Hours: {this.state.selectedPlace.hours} </h3>
+          <h3>  {this.state.selectedPlace.hours} </h3>
         </div>
     </InfoWindow>
     

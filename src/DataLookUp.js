@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './DataLookUp.css';
 import Mapit from './Mapit'
+import DataTable from './DataTable'
 
 class DataLookUp extends Component {
   constructor(props){
@@ -127,16 +128,16 @@ fetch(url, {
         .catch(error =>{
       console.error(error)  
     })
-      console.log("did it update table --- on 136", sortable[p][0])
+      console.log("did it update table --- on 130", sortable[p][0])
       updateCheck.firstAnswer=true;
       updateCheck[sortable[p][0]] = true;
       console.log(updateCheck);
-      console.log("line 137", closeAddress);
+      console.log("line 134", closeAddress); //WHY IS THIS ONLY SAYING ONE?
      
       } //closes for loop
 
-      console.log("on line 140", closeAddress);
-        console.log("we are on 141", closeAddress.length);
+      console.log("on line 138", closeAddress);
+        console.log("we are on 139", closeAddress.length);
     
 console.log("we areline 143", updateCheck);
 
@@ -147,11 +148,12 @@ console.log(result);
   }  
 else {
   console.log("we gonna update the statttteeeeee")
+  console.log("the names array and on line 151", closeNames)
     this.setState({
       locLats: closeLats,
       locLongs : closeLongs,
-      locNames : closeNames,
-      locAddress : closeAddress,
+      locNames : closeNames, //SHOULD BE closeNames
+      locAddress : ["6","10"], //SHOULD BE closeAddress when done testing
       locHours : closeHours,
       haveData: true
       })
@@ -171,35 +173,14 @@ else {
 printToTable(){  
 if (this.state.haveData === true){
   var testingAddress = this.state.locAddress;
-  console.log("this is the loc address in the state" )
-  console.log(this.state.locAddress);
+  console.log("this is the loc address in the state", this.state.locAddress) //WHY show 6 and 10 but wont print locLats array?
+  console.log("this is the latitudes in the state", this.state.locLats) //THIS IS PRINTING AN EMPTY ARRAY?
   console.log(testingAddress)
   return (
   <div>
-    <table>
-      <tbody>
-        <tr>
-          <th> Name </th>
-          <th> address </th>
-        </tr>
-        <tr>
-          <td> hello {testingAddress[0]} </td>
-          <td>{this.state.locAddress[0]}</td>
-          <td> {testingAddress.length} </td>
-         </tr>
-        <tr>
-          <td> {this.state.locNames[1]} </td>
-          <td> {this.state.locAddress[1]} </td>
-        </tr>
-        <tr>
-          <td> {this.state.locNames[2]} </td>
-          <td> {this.state.locAddress[2]} </td>
-        </tr>
-      </tbody>
-    </table>
-    <p> the locations are listed on the map below </p>
-    <Mapit locationLats = {this.state.locLats} locationLongs ={this.state.locLongs} locationNames = {this.state.locNames} userLat = {this.props.userLat} userLong = {this.props.userLong} />
-  </div> //NEED TO GET HOURS FROM THE DATA. 
+    <DataTable locationNames = {this.state.locNames} locationAdd = {this.state.locAddress} />
+    <Mapit locationNames = {this.state.locNames} locationHours = {this.state.locHours} locationLats = {this.state.locLats} locationLongs ={this.state.locLongs}  userLat = {this.props.userLat} userLong = {this.props.userLong} />
+  </div>
     );
   }
 }
