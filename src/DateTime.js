@@ -72,7 +72,6 @@ componentDidMount(){
     return(
       <div className ="dateTimeCont">
       	<h3> The Time is <span> {this.state.currentHour} : {this.state.currentMinute} </span> on {this.state.currentDay} </h3>
-      	{this.mealChange()}
      </div>
       );
   }

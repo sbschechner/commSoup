@@ -1,0 +1,7 @@
+.addressLabel{
+margin-right: 1%;
+}
+
+.addressLabel > input{
+	margin-left: 1%;
+}

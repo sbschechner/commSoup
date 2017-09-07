@@ -7,6 +7,11 @@ class DataTable extends Component {
 		this.state = {
 
 		};
+		this.refreshPage = this.refreshPage.bind(this);
+	}
+
+	refreshPage(){
+		window.location.reload(); 
 	}
 
 	render() {
@@ -34,8 +39,9 @@ class DataTable extends Component {
 					</tbody>
 				</table>
 
-				<p> The locations are placed below - Click marker for listed operating hours </p>
+				<p> The nearest locations for social services are placed below - Click the marker for listed operating hours </p>
 
+				<button className="refreshBut" onClick={this.refreshPage}> Refresh </button>
 			</div>
 		)
 

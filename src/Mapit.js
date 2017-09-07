@@ -82,7 +82,7 @@ render(){
     <InfoWindow
       marker={this.state.activeMarker}
       visible={this.state.showingInfoWindow} >
-        <div>
+        <div className="mapBox">
           <h1>{this.state.selectedPlace.name}</h1>
           <h3>  {this.state.selectedPlace.hours} </h3>
         </div>

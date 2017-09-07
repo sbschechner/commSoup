@@ -59,7 +59,7 @@ render() {
     return(
       <div className ="ManualLocCont">
         <form>
-        <label>
+        <label className="addressLabel">
          Please enter your NYC zip code:
             <input type='number' defaultValue = {this.state.tempZip}  onChange = {this.changeTempNumber}/>
             </label>

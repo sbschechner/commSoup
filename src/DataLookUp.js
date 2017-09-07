@@ -13,22 +13,34 @@ class DataLookUp extends Component {
       locNames: [],
       locAddress: [],
       locHours: [],
+      loadData: true,
     };
 
     this.accessData = this.accessData.bind(this);
     this.printToTable = this.printToTable.bind(this);
     this.showGetResults = this.showGetResults.bind(this);
     this.findDistance = this.findDistance.bind(this);
+    this.loadingData = this.loadingData.bind(this);
   }
 
   showGetResults() {
     if (this.props.hasLocation === "yes") {
       return (
-        <button onClick={this.accessData}> Find your 3 Nearest Locations in NYC </button>
+        <div>
+        <button onClick={this.accessData}> Find your 3 Nearest Soup Kitchens in NYC </button>
+        {this.loadingData()}
+        </div>
       )
     }
   }
 
+loadingData(){
+  if (this.state.loadData === false){
+    return(
+      <p> Loading Locations. . . </p>
+      )
+  }
+}
 
   findDistance(userLat, userLong, dataLat, dataLong) {
     var radlat1 = Math.PI * userLat / 180
@@ -45,15 +57,15 @@ class DataLookUp extends Component {
 
 
   accessData() { //THIS SHOULD FIND THE TOP 3 CLOSEST
-     console.log("accesing the data base");
+    this.setState({
+      loadData:false
+    })
+    console.log("accesing the data base");
     var closeLats = [];
     var closeLongs = [];
     var closeNames = [];
     var closeAddress = [];
     var closeHours = [];
-    var updateCheck = {
-      firstAnswer: false
-    }
 
     var url = "https://evening-thicket-30478.herokuapp.com/soupKitchens"
     fetch(url, {
@@ -101,10 +113,6 @@ class DataLookUp extends Component {
         });
 
 
-        //location show represents the number of shown locations
-        updateCheck[sortable[1][0]] = false;
-        updateCheck[sortable[2][0]] = false;
-        updateCheck[sortable[3][0]] = false;
 
         var self = this;
 
@@ -124,25 +132,27 @@ class DataLookUp extends Component {
 
               if (n === 0) {
                 console.log("the last request finished");
-                updateMyStateBro();
+                updateMyState();
               } else {
                 downloadData(n - 1);
               }
             });
         }
 
-        function updateMyStateBro() {
+        function updateMyState() {
           self.setState({
             locLats: closeLats,
             locLongs: closeLongs,
             locNames: closeNames, 
             locAddress: closeAddress, 
             locHours: closeHours,
-            haveData: true
+            haveData: true,
+            loadData: true,
           });
 
           console.log("STATE WAS UPDATED.");
         }
+
         downloadData(3);
       });
   }
